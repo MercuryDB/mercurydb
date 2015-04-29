@@ -1,5 +1,7 @@
 # MercuryDB
 
+[![Join the chat at https://gitter.im/MercuryDB/mercurydb](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/MercuryDB/mercurydb?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 [![Join the chat at https://gitter.im/colestew/mercurydb](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/colestew/mercurydb?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 A non-persistent single-schema main-memory database, written in Java.
