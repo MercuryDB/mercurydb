@@ -3,7 +3,7 @@ apply plugin: 'maven'
 apply plugin: 'signing'
 
 group = 'com.github.mercurydb'
-version = '0.6.1'
+version = '0.6.2'
 
 task javadocJar(type: Jar, dependsOn: javadoc) {
     classifier = 'javadoc'
@@ -22,7 +22,7 @@ artifacts {
 }
 
 signing {
-    required { true }
+    required { gradle.taskGraph.hasTask("uploadArchives") }
     sign configurations.archives
 }
 
