@@ -105,8 +105,10 @@ public class MercuryBootstrap {
      * Performs the bootstrap operation. This is everything. The
      * cat's meow. Namely, it fetches all class files in the
      * source directory and converts them into class objects. Then
+     *
+     * @param dbDir  the base java (+package) directory to output tables into
      */
-    public void generateTables() {
+    public void generateTables(String dbDir) {
         // Fetch appropriate class files
         Collection<Class<?>> classes = getSupportedClasses();
 
@@ -116,7 +118,7 @@ public class MercuryBootstrap {
             System.exit(1);
         }
 
-        String basePath = _srcJavaDir + '/' + _outPackage.replace('.', '/');
+        String basePath = dbDir + '/' + _outPackage.replace('.', '/');
 
         // startup a collection of table files we generate
         // and create a map of input package classes to their subclasses

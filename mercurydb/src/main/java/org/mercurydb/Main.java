@@ -20,6 +20,9 @@ public class Main {
         opt = new Option("root", "java-root", true, "The root java directory");
         opt.setRequired(true);
         options.addOption(opt);
+        opt = new Option("dbdir", "db-directory", true, "The output directory for generated tables. (Default is relative to root)");
+        options.addOption(opt);
+        opt.setRequired(false);
         opt = new Option("ih", "insert-hooks", true, "Insert db hooks into package. Can specify output class directory.");
         options.addOption(opt);
         opt = new Option("sx", "suffix", true, "Specify output file suffix. Default is *Table");
@@ -34,11 +37,11 @@ public class Main {
             printHelp(options);
         }
 
-        // TODO warning: cmd.getOptionValue("src") may produce NullPointerException (how? and why is this a warning)
         String srcPkg = cmd.getOptionValue("src");
         String dbPkg = cmd.getOptionValue("db");
         String srcDir = cmd.getOptionValue("root");
         String suffix = cmd.getOptionValue("sfx");
+        String dbDir = cmd.getOptionValue("dbdir", srcDir);
 
         if (srcPkg != null && dbPkg != null && srcDir != null) {
             MercuryBootstrap bs = new MercuryBootstrap(srcPkg, dbPkg, srcDir);
@@ -49,7 +52,7 @@ public class Main {
                 String hooksBaseDir = cmd.getOptionValue("ih", "build/classes/main");
                 bs.insertBytecodeHooks(hooksBaseDir);
             } else {
-                bs.generateTables();
+                bs.generateTables(dbDir);
             }
         }
     }

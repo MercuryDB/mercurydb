@@ -46,7 +46,8 @@ public class HgDB {
         if (predicate instanceof ValueExtractableRelation) {
             ValueExtractableRelation<?, ?> fer = (ValueExtractableRelation<?, ?>) predicate;
             if (fer.isIndexed() && fer.relation == HgRelation.EQ) {
-                return -(fer.getIndex().get(fer.value).size());
+                Set<Object> value = fer.getIndex().get(fer.value);
+                return -(value == null ? 0 : value.size());
             } else if (isIndexCompatible(fer.getIndex(), fer.relation)) {
                 return 2;
             }
