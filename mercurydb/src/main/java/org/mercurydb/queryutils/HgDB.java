@@ -22,7 +22,7 @@ import java.util.*;
  * public static HgPolyTupleStream join(
  *     HgTupleStream a,
  *     HgTupleStream b,
- *     [HgBiPredicate<?, ?> relation]) // meaning the relation is optional
+ *     HgBiPredicate relation) // relation is optional
  * </code>
  * or
  * <code>
@@ -186,7 +186,7 @@ public class HgDB {
      * a hash join will be used in this case.
      *
      * @param predicate  the given predicate consisting of 2 streams and a relation.
-     * @return
+     * @return  The HgPolyTupleStream resulting from performing a join of two poly streams
      */
     public static HgPolyTupleStream join(JoinPredicate predicate) {
         HgTupleStream a = predicate.streamA, b = predicate.streamB;

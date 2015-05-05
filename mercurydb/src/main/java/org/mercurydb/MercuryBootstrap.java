@@ -49,11 +49,10 @@ public class MercuryBootstrap {
      * @param srcPackage the input package for client code
      * @param outPackage the output root package for generated code
      * @param rootDir    the root directory for java files
-     * @throws NotFoundException
-     * @throws CannotCompileException
+     * @throws NotFoundException  if a file cannot be found
      */
     public MercuryBootstrap(String srcPackage, String outPackage, String rootDir)
-            throws NotFoundException, CannotCompileException {
+            throws NotFoundException {
         this._srcPackage = srcPackage;
         this._outPackage = outPackage;
         this._srcJavaDir = rootDir;
@@ -184,7 +183,7 @@ public class MercuryBootstrap {
 
     /**
      * Inserts bytecode hooks in the classes found in the input package
-     * @param hooksBaseDir
+     * @param hooksBaseDir  the base class output directory where bytecode lives
      */
     public void insertBytecodeHooks(String hooksBaseDir) {
         Collection<Class<?>> classes = getSupportedClasses();

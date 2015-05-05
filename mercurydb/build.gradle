@@ -22,6 +22,7 @@ artifacts {
 }
 
 signing {
+    required { false }
     sign configurations.archives
 }
 
@@ -29,17 +30,26 @@ uploadArchives {
     repositories {
         mavenDeployer {
             beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
- 
-            repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
-              authentication(userName: "colestew", privateKey: "~/.ssh/id_rsa")
-            }
- 
+            repository(url: "file:///Users/colestewart/Dropbox/Public/mvn-repository")
+
+            // uncomment when maven central becomes available
+            // repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
+            //   authentication(userName: "colestew", privateKey: "~/.ssh/id_rsa")
+            // }
+            
             pom.project {
                name 'MercuryDB'
                packaging 'jar'
                description 'A non-persistent main-memory database in Java! See our Github page for more details'
                url 'http://github.com/MercuryDB'
  
+               repositories {
+                   repository {
+                       id 'dropbox'
+                       url 'https://dl.dropboxusercontent.com/u/40569306/mvn-repository/'
+                   }
+               }
+               
                scm {
                    url 'scm:git@github.com:MercuryDB/mercurydb.git'
                    connection 'scm:git@github.com:MercuryDB/mercurydb.git'
