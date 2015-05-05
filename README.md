@@ -1,10 +1,10 @@
 # MercuryDB
 
-[![Join the chat at https://gitter.im/colestew/mercurydb](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/colestew/mercurydb?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Join the chat at https://gitter.im/mercurydb/mercurydb](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/mercurydb/mercurydb?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 A non-persistent single-schema main-memory database, written in Java.
 
-For the most up-to-date documentation, see [the MercuryDB Wiki](https://github.com/colestew/mercurydb/wiki/).
+For the most up-to-date documentation, see [the MercuryDB Wiki](https://github.com/mercurydb/mercurydb/wiki/).
 
 The goal is to provide a framework and interface for developers to interact with objects in their program through concepts and vocabulary inspired by a traditional, persistent NoSQL database, without having to configure and maintain a database solution, which is typically heavy-weight and difficult to deploy and maintain. With _MercuryDB_, a developer gains all the benefits of interacting with data in their programs without any of the complexity of maintaining a persistent datastore. 
 
@@ -66,4 +66,4 @@ Given `.class` files, we use a utility library called `javassist` to update the 
 
 ## Wiki
 
-See our [wiki on GitHub](https://github.com/colestew/mercurydb/wiki) to find out more about the technical workings of _MercuryDB_.
+See our [wiki on GitHub](https://github.com/mercurydb/mercurydb/wiki) to find out more about the technical workings of _MercuryDB_.
