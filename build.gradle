@@ -2,14 +2,8 @@ allprojects {
     apply plugin: 'java'
     apply plugin: 'eclipse'
 
-    //sourceCompatibility = 1.7;
-    //targetCompatibility = 1.7;
-
-//    gradle.projectsEvaluated {
-//        tasks.withType(JavaCompile) {
-//            options.compilerArgs << "-Xlint:unchecked"// << "-Xlint:deprecation"
-//        }
-//    }
+    sourceCompatibility = 1.8;
+    targetCompatibility = 1.8;
 
     repositories {
         mavenCentral()
@@ -17,7 +11,6 @@ allprojects {
 
     dependencies {
         compile 'com.google.guava:guava:+'
-        // shorthand for compile group: 'com.google.guava', name: 'guava', version: '+'
         compile 'commons-io:commons-io:+'
         compile 'com.github.spullara.mustache.java:compiler:+'
         compile 'org.javassist:javassist:+'
