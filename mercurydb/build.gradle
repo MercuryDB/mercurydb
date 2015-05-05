@@ -1,6 +1,107 @@
 apply plugin: 'application'
 apply plugin: 'maven' 
+apply plugin: 'signing'
 
+group = 'org.mercurydb'
+version = '0.6.1'
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from 'build/docs/javadoc'
+}
+
+task sourcesJar(type: Jar) {
+    from sourceSets.main.allSource
+    classifier = 'sources'
+}
+
+artifacts {
+    archives jar
+    archives javadocJar
+    archives sourcesJar
+}
+
+signing {
+    sign configurations.archives
+}
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+ 
+            repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
+              authentication(userName: "colestew", privateKey: "/myhome/.ssh/id_rsa"
+            }
+ 
+            pom.project {
+               name 'MercuryDB'
+               packaging 'jar'
+               description 'A non-persistent main-memory database in Java! See our Github page for more details'
+               url 'http://github.com/MercuryDB'
+ 
+               scm {
+                   url 'scm:git@github.com:MercuryDB/mercurydb.git'
+                   connection 'scm:git@github.com:MercuryDB/mercurydb.git'
+                   developerConnection 'scm:git@github.com:MercuryDB/mercurydb.git'
+               }
+ 
+               licenses {
+                   license {
+                       name 'MIT License'
+                       url 'http://opensource.org/licenses/MIT'
+                       distribution 'repo'
+                   }
+               }
+ 
+               developers {
+                   developer {
+                       id 'colestew'
+                       name 'Cole Stewart'
+                       email 'tcstewart09@gmail.com'
+                       organization 'The University of Texas at Austin'
+                       organizationUrl 'http://www.cs.utexas.edu'
+                   }
+                   developer {
+                       id 'dilijev'
+                       name 'Doug Ilijev'
+                       email 'doug.ilijev@gmail.com'
+                       organization 'The University of Texas at Austin'
+                       organizationUrl 'http://www.cs.utexas.edu'
+                   }
+               }
+
+               dependencies {
+                   dependency {
+                       groupId 'com.google.guava'
+                       artifactId 'guava'
+                       version '+'
+                   }
+                   dependency {
+                       groupId 'commons-io'
+                       artifactId 'commons-io'
+                       version '+'
+                   }
+                   dependency {
+                       groupId 'com.github.spullara.mustache.java'
+                       artifactId 'compiler'
+                       version '+'
+                   }
+                   dependency {
+                       groupId 'org.javassist'
+                       artifactId 'javassist'
+                       version '+'
+                   }
+                   dependency {
+                       groupId 'commons-cli'
+                       artifactId 'commons-cli'
+                       version '+'
+                   }
+               }
+           }
+        }
+    }
+}       
 mainClassName = 'org.mercurydb.Main'
 
 // this is the standard task for building the normal jar in build/libs/...
