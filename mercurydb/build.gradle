@@ -2,7 +2,7 @@ apply plugin: 'application'
 apply plugin: 'maven' 
 apply plugin: 'signing'
 
-group = 'org.mercurydb'
+group = 'com.github.mercurydb'
 version = '0.6.1'
 
 task javadocJar(type: Jar, dependsOn: javadoc) {
@@ -22,7 +22,7 @@ artifacts {
 }
 
 signing {
-    required { false }
+    required { true }
     sign configurations.archives
 }
 
