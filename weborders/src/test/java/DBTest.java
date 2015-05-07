@@ -1,9 +1,9 @@
+import com.github.mercurydb.queryutils.*;
 import com.google.common.collect.Lists;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.mercurydb.queryutils.*;
-import org.mercurydb.queryutils.HgTupleStream.HgTuple;
-import org.mercurydb.queryutils.joiners.JoinNestedLoops;
+import com.github.mercurydb.queryutils.HgTupleStream.HgTuple;
+import com.github.mercurydb.queryutils.joiners.JoinNestedLoops;
 import weborders.db.OdetailTable;
 import weborders.db.OrderTable;
 import weborders.db.PartTable;

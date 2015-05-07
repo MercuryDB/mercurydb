@@ -28,7 +28,7 @@ A __schema__ is produced by _MercuryDB_ after running `hgdb` on a __package__ an
 
 #### Mercury Packages
 
-A library __source package__ is typically given a namespace like `com.developer.library`. `org.mercurydb.Main` is the executable Java file responsible for the creation of the files in an HgDB database. 
+A library __source package__ is typically given a namespace like `com.developer.library`. `Main` is the executable Java file responsible for the creation of the files in an HgDB database.
 
 #### Mercury Database API
 

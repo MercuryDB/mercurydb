@@ -111,22 +111,23 @@ uploadArchives {
            }
         }
     }
-}       
-mainClassName = 'org.mercurydb.Main'
+}
+
+mainClassName = 'com.github.mercurydb.Main'
 
 // this is the standard task for building the normal jar in build/libs/...
 // this will run by default when you run 'gradle build' or 'gradle assemble'
 jar {
     manifest {
-        attributes 'Main-Class': 'org.mercurydb.Main'
-    }
+        attributes 'Main-Class': mainClassName
+    } 
 }
 
 //create a single Jar with all dependencies
 task fatJar(type: Jar) {
     manifest {
         attributes 'Implementation-Title': 'Big MercuryDB Jar',  
-            'Main-Class': 'org.mercurydb.Main'
+            'Main-Class': mainClassName
     }
     baseName = project.name + '-all'
     from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }

@@ -16,7 +16,7 @@ task clearDB(type: Delete) {
 
 task generateTables(type: JavaExec) {
     classpath = sourceSets.main.runtimeClasspath
-    main = 'org.mercurydb.Main'
+    main = 'com.github.mercurydb.Main'
     args = [
         '-src', project.mercurySrc,
         '-db', project.mercuryOut,
@@ -32,7 +32,7 @@ task compileTables(type: JavaCompile) {
 
 task insertHooks(type: JavaExec) { 
     classpath = sourceSets.main.runtimeClasspath
-    main = 'org.mercurydb.Main'
+    main = 'com.github.mercurydb.Main'
     args = [
         '-src', project.mercurySrc,
         '-db', project.mercuryOut,

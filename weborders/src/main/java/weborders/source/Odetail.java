@@ -4,9 +4,9 @@
  */
 package weborders.source;
 
-import org.mercurydb.annotations.HgIndexStyle;
-import org.mercurydb.annotations.HgUpdate;
-import org.mercurydb.annotations.HgValue;
+import com.github.mercurydb.annotations.HgIndexStyle;
+import com.github.mercurydb.annotations.HgUpdate;
+import com.github.mercurydb.annotations.HgValue;
 
 import java.util.ArrayList;
 import java.util.List;
