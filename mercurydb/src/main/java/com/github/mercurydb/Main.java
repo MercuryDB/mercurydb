@@ -28,7 +28,7 @@ public class Main {
         opt = new Option("sx", "suffix", true, "Specify output file suffix. Default is *Table");
         opt.setRequired(false);
 
-        CommandLineParser parser = new GnuParser();
+        CommandLineParser parser = new DefaultParser();
 
         CommandLine cmd = null;
         try {

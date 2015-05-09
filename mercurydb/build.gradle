@@ -5,20 +5,26 @@ apply plugin: 'signing'
 group = 'com.github.mercurydb'
 version = '0.6.2'
 
+dependencies {
+    compile 'com.google.guava:guava:18.0'
+    compile 'commons-io:commons-io:2.4'
+    compile 'com.github.spullara.mustache.java:compiler:0.9.0'
+    compile 'org.javassist:javassist:3.19.0-GA'
+    compile 'commons-cli:commons-cli:1.3'
+}
+
 task javadocJar(type: Jar, dependsOn: javadoc) {
     classifier = 'javadoc'
     from 'build/docs/javadoc'
 }
 
 task sourcesJar(type: Jar) {
-    from sourceSets.main.allSource
     classifier = 'sources'
+    from sourceSets.main.allSource
 }
 
 artifacts {
-    archives jar
-    archives javadocJar
-    archives sourcesJar
+    archives jar, javadocJar, sourcesJar
 }
 
 signing {
@@ -30,25 +36,21 @@ uploadArchives {
     repositories {
         mavenDeployer {
             beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
-            repository(url: "file:///Users/colestewart/Dropbox/Public/mvn-repository")
+            
+            repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
+                authentication(userName: ossrhUsername, password: ossrhPassword)
+            }
 
-            // uncomment when maven central becomes available
-            // repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
-            //   authentication(userName: "colestew", privateKey: "~/.ssh/id_rsa")
-            // }
+            snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
+                authentication(userName: ossrhUsername, password: ossrhPassword)
+            }
             
             pom.project {
                name 'MercuryDB'
                packaging 'jar'
                description 'A non-persistent main-memory database in Java! See our Github page for more details'
                url 'http://github.com/MercuryDB'
- 
-               repositories {
-                   repository {
-                       id 'dropbox'
-                       url 'https://dl.dropboxusercontent.com/u/40569306/mvn-repository/'
-                   }
-               }
+
                
                scm {
                    url 'scm:git@github.com:MercuryDB/mercurydb.git'
@@ -78,34 +80,6 @@ uploadArchives {
                        email 'doug.ilijev@gmail.com'
                        organization 'The University of Texas at Austin'
                        organizationUrl 'http://www.cs.utexas.edu'
-                   }
-               }
-
-               dependencies {
-                   dependency {
-                       groupId 'com.google.guava'
-                       artifactId 'guava'
-                       version '+'
-                   }
-                   dependency {
-                       groupId 'commons-io'
-                       artifactId 'commons-io'
-                       version '+'
-                   }
-                   dependency {
-                       groupId 'com.github.spullara.mustache.java'
-                       artifactId 'compiler'
-                       version '+'
-                   }
-                   dependency {
-                       groupId 'org.javassist'
-                       artifactId 'javassist'
-                       version '+'
-                   }
-                   dependency {
-                       groupId 'commons-cli'
-                       artifactId 'commons-cli'
-                       version '+'
                    }
                }
            }
