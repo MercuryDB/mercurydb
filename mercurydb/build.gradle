@@ -5,6 +5,9 @@ apply plugin: 'signing'
 group = 'com.github.mercurydb'
 version = '0.6.2'
 
+def ossrhUsername = project.hasProperty('ossrhUsername') ? project.property('ossrhUsername') : null
+def ossrhPassword = project.hasProperty('ossrhPassword') ?  project.property('ossrhPassword') : null
+
 dependencies {
     compile 'com.google.guava:guava:18.0'
     compile 'commons-io:commons-io:2.4'
@@ -32,17 +35,18 @@ signing {
     sign configurations.archives
 }
 
+
 uploadArchives {
     repositories {
         mavenDeployer {
             beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
             
             repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
-                authentication(userName: ossrhUsername, password: ossrhPassword)
+                authentication(userName: ossrhUsername, password: ossrhPassword) 
             }
 
             snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
-                authentication(userName: ossrhUsername, password: ossrhPassword)
+                authentication(userName: ossrhUsername, password: ossrhPassword) 
             }
             
             pom.project {
@@ -50,7 +54,6 @@ uploadArchives {
                packaging 'jar'
                description 'A non-persistent main-memory database in Java! See our Github page for more details'
                url 'http://github.com/MercuryDB'
-
                
                scm {
                    url 'scm:git@github.com:MercuryDB/mercurydb.git'
@@ -85,6 +88,10 @@ uploadArchives {
            }
         }
     }
+}
+
+uploadArchives.onlyIf {
+    ossrhPassword != null && ossrhUsername != null
 }
 
 mainClassName = 'com.github.mercurydb.Main'
