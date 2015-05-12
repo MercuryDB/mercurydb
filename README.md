@@ -42,10 +42,6 @@ Because _MercuryDB_ performs static code generation based on the contents of a _
 
 Because the database remains fully resident in memory while the application is running, we never have to go to disk to query objects in the database. This makes _MercuryDB_ orders of magnitude faster than traditional databases whose objects remain resident on disk.
 
-### Performance Analysis
-
-[coming soon]
-
 ## Compatibility
 
 Unfortunately, not all libraries may be compatible with _MercuryDB_ as written. We assume a certain code structure and some restrictions on how classes must be written in order to benefit from _MercuryDB_'s features and achieve full correctness.
