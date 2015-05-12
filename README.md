@@ -2,6 +2,8 @@
 
 [![Join the chat at https://gitter.im/mercurydb/mercurydb](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/mercurydb/mercurydb?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
+***We're on Maven Central! com.github.mercurydb:mercurydb***
+
 A non-persistent single-schema main-memory database, written in Java.
 
 For the most up-to-date documentation, see [the MercuryDB Wiki](https://github.com/mercurydb/mercurydb/wiki/).
