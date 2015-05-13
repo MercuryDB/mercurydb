@@ -159,7 +159,7 @@ public class MercuryBootstrap {
     public static Map<String, AnnotationPair<HgValue>> getHgValues(Class c) {
         Map<String, AnnotationPair<HgValue>> valueMap = new HashMap<>();
 
-        for (Method m : c.getMethods()) {
+        for (Method m : c.getDeclaredMethods()) {
             HgValue valueAnn = m.getAnnotation(HgValue.class);
             if (valueAnn == null) continue;
 
