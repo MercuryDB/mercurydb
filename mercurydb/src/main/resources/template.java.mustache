@@ -2,6 +2,7 @@ package {{packageName}};
 
 import com.github.mercurydb.queryutils.*;
 import java.util.*;
+import com.google.common.collect.Sets;
 
 import {{fullSourceClass}};
 
@@ -16,7 +17,7 @@ public class {{sourceClass}}{{tableSuffix}} {
         return TableID.<{{sourceClass}}>createAlias();
     }
 
-    public static final List<{{sourceClass}}> table = new ArrayList<>();
+    private static final Set<{{sourceClass}}> table = Sets.newIdentityHashSet();
 
     public static final Class<{{sourceClass}}> containedClass = {{sourceClass}}.class;
 

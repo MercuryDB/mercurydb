@@ -2,6 +2,8 @@
 
 [![Join the chat at https://gitter.im/mercurydb/mercurydb](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/mercurydb/mercurydb?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
+***We're on Maven Central! com.github.mercurydb:mercurydb***
+
 A non-persistent single-schema main-memory database, written in Java.
 
 For the most up-to-date documentation, see [the MercuryDB Wiki](https://github.com/mercurydb/mercurydb/wiki/).
@@ -41,10 +43,6 @@ In order to interact with the database functionality provided by the modificatio
 Because _MercuryDB_ performs static code generation based on the contents of a __source package__ we benefit from a static schema -- that is, a schema which does not change during the runtime of an application. With a static schema we can highly optimize operations on objects (which function like rows in a database table) in a way that a traditional database can not do.
 
 Because the database remains fully resident in memory while the application is running, we never have to go to disk to query objects in the database. This makes _MercuryDB_ orders of magnitude faster than traditional databases whose objects remain resident on disk.
-
-### Performance Analysis
-
-[coming soon]
 
 ## Compatibility
 
