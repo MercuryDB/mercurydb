@@ -23,7 +23,7 @@ public class BytecodeModifier {
 
     public void modify() throws CannotCompileException, IOException, NotFoundException {
         String constructorHook = _tableClass + ".insert(this);";
-        for (CtConstructor con : _srcCtClass.getConstructors()) {
+        for (CtConstructor con : _srcCtClass.getDeclaredConstructors()) {
             con.insertAfter(constructorHook);
         }
 
@@ -34,7 +34,7 @@ public class BytecodeModifier {
     private void insertMethodHooks() throws CannotCompileException {
         Map<String, AnnotationPair<HgValue>> valueMap = MercuryBootstrap.getHgValues(_srcClass);
 
-        for (CtMethod m : _srcCtClass.getMethods()) {
+        for (CtMethod m : _srcCtClass.getDeclaredMethods()) {
             HgUpdate updateAnn = null;
 
             try {
@@ -47,7 +47,6 @@ public class BytecodeModifier {
 
             for (String value : updateAnn.value()) {
                 if (valueMap.containsKey(value)) {
-                    AnnotationPair<HgValue> pair = valueMap.get(value);
 
                     String removeHook = String.format("%s.removeStaleValue%s(this);",
                             _tableClass,
