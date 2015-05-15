@@ -56,11 +56,14 @@ public class HgClosureGraph<TA, TB> {
             Object element = streamB.extractFieldFromTuple(t);
             nodeMap.put(element, new Node(element));
         }
+
+        streamA.reset();
+        streamB.reset();
     }
 
     public int calculateSteps(Node nA, Node nB, int maxSteps) {
         int count = 0;
-        while (nA != nB && (maxSteps < 0 || count < maxSteps)) {
+        while (nA != null && nA != nB && (maxSteps < 0 || count < maxSteps)) {
             nA = nA.next;
             ++count;
         }
@@ -69,7 +72,7 @@ public class HgClosureGraph<TA, TB> {
 
     public JoinPredicate transitiveClosurePredicate() {
         return new JoinPredicate(streamA, streamB, (o1, o2) ->
-           calculateSteps(nodeMap.get(o1), nodeMap.get(o2), -1) >= 0
+                calculateSteps(nodeMap.get(o1), nodeMap.get(o2), -1) >= 0
         );
     }
 
