@@ -5,7 +5,9 @@ import com.github.mercurydb.queryutils.HgDB;
 import com.github.mercurydb.queryutils.HgTupleStream;
 import com.github.mercurydb.queryutils.JoinPredicate;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class HgClosureGraph<TA, TB> {
@@ -39,7 +41,7 @@ public class HgClosureGraph<TA, TB> {
             Node nA = nodeMap.get(oA);
             Node nB = nodeMap.get(oB);
 
-            nA.next = nB;
+            nA.next.add(nB);
         }
     }
 
@@ -61,34 +63,42 @@ public class HgClosureGraph<TA, TB> {
         streamB.reset();
     }
 
-    public int calculateSteps(Node nA, Node nB, int maxSteps) {
-        int count = 0;
-        while (nA != null && nA != nB && (maxSteps < 0 || count < maxSteps)) {
-            nA = nA.next;
-            ++count;
+    public int calculateSteps(Node nA, Node nB, int depth, int maxSteps) {
+        if (maxSteps >= 0 && depth >= maxSteps) {
+            return -1;
+        } else if (nA == nB) {
+            return depth;
         }
-        return nA == nB ? count : -1;
+
+        for (Node n : nA.next) {
+            int result = calculateSteps(n, nB, depth+1, maxSteps);
+            if (result >= 0) {
+                return result;
+            }
+        }
+
+        return -1;
     }
 
     public JoinPredicate transitiveClosurePredicate() {
         return new JoinPredicate(streamA, streamB, (o1, o2) ->
-                calculateSteps(nodeMap.get(o1), nodeMap.get(o2), -1) >= 0
+                calculateSteps(nodeMap.get(o1), nodeMap.get(o2), 0, -1) >= 0
         );
     }
 
     public JoinPredicate transitiveClosurePredicate(int maxSteps) {
         return new JoinPredicate(streamA, streamB, (o1, o2) ->
-                calculateSteps(nodeMap.get(o1), nodeMap.get(o2), maxSteps) >= 0
+                calculateSteps(nodeMap.get(o1), nodeMap.get(o2), 0, maxSteps) >= 0
         );
     }
 
-    public HgStream<T>
-    private class Node<T> {
-        private Node next;
-        private T data;
+    private class Node {
+        private List<Node> next;
+        private Object data;
 
-        private Node(T data) {
+        private Node(Object data) {
             this.data = data;
+            next = new ArrayList<>();
         }
     }
 }
