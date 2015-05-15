@@ -67,7 +67,7 @@ public class HgClosureGraph<TA, TB> {
             nA = nA.next;
             ++count;
         }
-        return nA == nB ? -1 : count;
+        return nA == nB ? count : -1;
     }
 
     public JoinPredicate transitiveClosurePredicate() {
@@ -82,6 +82,7 @@ public class HgClosureGraph<TA, TB> {
         );
     }
 
+    public HgStream<T>
     private class Node<T> {
         private Node next;
         private T data;
