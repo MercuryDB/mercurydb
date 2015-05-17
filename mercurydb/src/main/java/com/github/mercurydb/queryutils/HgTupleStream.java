@@ -11,7 +11,8 @@ public abstract class HgTupleStream
     protected final Map<TableID<?>, Integer> _containedTypes;
     private int tupleIndexCounter = 0;
 
-    public HgTupleStream(HgTupleStream o) {
+    public HgTupleStream(HgTupleStream o)
+    {
         this(o._fwdFE);
     }
 
@@ -31,6 +32,40 @@ public abstract class HgTupleStream
         this._containedTypes = new HashMap<>();
 
         containedTypes.forEach(this::addContainedType);
+    }
+
+    public HgTupleStream filter(HgPredicate<HgTuple> tPred) {
+        return new HgTupleStream(this) {
+            HgTuple next = null;
+            HgTupleStream owner = HgTupleStream.this;
+
+            @Override
+            public boolean hasNext() {
+                while (owner.hasNext()) {
+                    HgTuple next = owner.next();
+                    if (tPred.test(next)) {
+                        this.next = next;
+                        return true;
+                    }
+                }
+                return false;
+            }
+
+            @Override
+            public HgTuple next() {
+                return next;
+            }
+
+            @Override
+            public void reset() {
+                owner.reset();
+            }
+
+            @Override
+            public boolean isIndexed() {
+                return owner.isIndexed();
+            }
+        };
     }
 
     @Override
