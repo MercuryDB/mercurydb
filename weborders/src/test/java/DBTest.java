@@ -168,7 +168,7 @@ public class DBTest {
     @Test
     public void testJoinCollection() {
         HgTupleStream stream = HgDB.join(
-                PartTable.stream().joinOn(PartTable.self(PartTable.ID)),
+                PartTable.stream().joinOn(PartTable.reference(PartTable.ID)),
                 OdetailTable.on.pnos(),
                 HgRelation.IN
         );

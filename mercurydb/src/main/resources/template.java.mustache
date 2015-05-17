@@ -150,7 +150,7 @@ public class {{sourceClass}}{{tableSuffix}} {
         {{/values}}
     }
 
-    public static ValueExtractableSeed<{{sourceClass}}> self(TableID<{{sourceClass}}> id) {
+    public static ValueExtractableSeed<{{sourceClass}}> reference(TableID<{{sourceClass}}> id) {
         return new ValueExtractableSeed<{{sourceClass}}>(id) {
             @Override
             public Object extractValue(Object instance) {
@@ -179,6 +179,10 @@ public class {{sourceClass}}{{tableSuffix}} {
         };
     }
 
+    public static HgTupleStream onReference() {
+        return stream().joinOn(reference(ID));
+    }
+
     public static final JoinValue on = new JoinValue(ID);
 
     public static JoinAsValue as(TableID<{{sourceClass}}> id) {
@@ -191,10 +195,14 @@ public class {{sourceClass}}{{tableSuffix}} {
         public JoinAsValue(TableID<{{sourceClass}}> aliasId) {
             this.on = new JoinValue(aliasId);
         }
+
+        public HgTupleStream onReference() {
+            return stream().joinOn({{sourceClass}}{{tableSuffix}}.reference(on.id));
+        }
     }
 
     public static class JoinValue {
-        private final TableID<{{sourceClass}}> id;
+        public final TableID<{{sourceClass}}> id;
 
         public JoinValue(TableID<{{sourceClass}}> aliasId) {
             this.id = aliasId;
@@ -272,7 +280,7 @@ public class {{sourceClass}}{{tableSuffix}} {
 
     public static ValueExtractablePredicate<{{sourceClass}}, {{sourceClass}}>
     predicate (HgPredicate<{{sourceClass}}> predicate) {
-        return new ValueExtractablePredicate<>(self(ID), predicate);
+        return new ValueExtractablePredicate<>(reference(ID), predicate);
     }
 
     public static class predicates {
