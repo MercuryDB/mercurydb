@@ -1,5 +1,13 @@
-# MercuryDB
 
+    o   o                            o-o   o--o  
+    |\ /|                            |  \  |   | 
+    | O | o-o o-o  o-o o  o o-o o  o |   O O--o  
+    |   | |-' |   |    |  | |   |  | |  /  |   | 
+    o   o o-o o    o-o o--o o   o--O o-o   o--o  
+                                   |             
+                                o--o             
+
+# MercuryDB
 [![Join the chat at https://gitter.im/mercurydb/mercurydb](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/mercurydb/mercurydb?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 ***We're on Maven Central! com.github.mercurydb:mercurydb***
