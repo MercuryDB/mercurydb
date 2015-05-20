@@ -3,7 +3,7 @@ apply plugin: 'maven'
 apply plugin: 'signing'
 
 group = 'com.github.mercurydb'
-version = '0.6.3-SNAPSHOT'
+version = '0.6.3'
 
 def ossrhUsername = project.hasProperty('ossrhUsername') ? project.property('ossrhUsername') : null
 def ossrhPassword = project.hasProperty('ossrhPassword') ?  project.property('ossrhPassword') : null
